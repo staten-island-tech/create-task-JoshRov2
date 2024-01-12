@@ -23,4 +23,5 @@ function quoteGen(quote){
     appEl.insertAdjacentHTML("beforeend", HTML)
     });
 }
-quoteGen(quoteURL);
+const quotes = await getData(quoteURL)
+quoteGen(quotes);
