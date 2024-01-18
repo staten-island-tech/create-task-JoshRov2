@@ -39,7 +39,7 @@ quoteBtn.addEventListener("click",() =>{
 
 appEl.addEventListener("click", async(event) => {
     if(event.target.matches(".next")){
-
+      
     }
     if(event.target.matches(".fave")){
       
