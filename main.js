@@ -39,7 +39,12 @@ quoteBtn.addEventListener("click",() =>{
 
 appEl.addEventListener("click", async(event) => {
     if(event.target.matches(".next")){
-      
+      console.log(quotes);
+  const nextQuote = quotes.Results;
+  if(!display){
+    return false;
+  }
+  quoteGen(nextQuote);
     }
     if(event.target.matches(".fave")){
       
