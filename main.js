@@ -1,6 +1,7 @@
 const appEl = document.getElementById('app');
 const favorites = [];
 const quoteBtn = document.getElementById('startup')
+
 async function getData(URL) {
   try {
     const response = await fetch(URL);
@@ -12,13 +13,13 @@ async function getData(URL) {
   }
 };
 
-const quoteURL =`https://favqs.com/api/qotd?format=json`;
+const quoteURL =`https://api.quotable.io/quotes/random`;
 console.log(quoteURL);
 function quoteGen(quote){
     appEl.textContent = " ";
     quote.forEach((result) => {
         const HTML = `
-        <h2>${result.body}</h2>
+        <h2>${result.content}</h2>
         <h3>Author: ${result.author}</h3>
         <button class="next">Next Quote</button>
         <button class="fave">Add to Favorites</button>
