@@ -47,7 +47,8 @@ appEl.addEventListener("click", async(event) => {
   quoteGen(nextQuote);
     }
     if(event.target.matches(".fave")){
-      
+    const faveQuote = await fetchData(quotes.Results, favorites)
+    favorites.push(faveQuote);
     }
     if(event.target.matches(".dis")){
       
