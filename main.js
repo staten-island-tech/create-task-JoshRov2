@@ -12,8 +12,15 @@ async function getData(URL) {
     console.error(error);
   }
 };
-
 const quoteURL =`https://api.quotable.io/quotes/random`;
+const quotes = await getData(quoteURL)
+quoteBtn.addEventListener("click",() =>{
+  console.log(quotes);
+  if(!quotes){
+    return false;
+  }
+  quoteGen(quotes);
+});
 console.log(quoteURL);
 function quoteGen(quote){
     appEl.textContent = " ";
@@ -28,15 +35,6 @@ function quoteGen(quote){
     appEl.insertAdjacentHTML("beforeend", HTML)
     });
 }
-const quotes = await getData(quoteURL)
-quoteBtn.addEventListener("click",() =>{
-  console.log(quotes);
-  const display = quotes.Results;
-  if(!display){
-    return false;
-  }
-  quoteGen(display);
-});
 
 appEl.addEventListener("click", async(event) => {
     if(event.target.matches(".next")){
