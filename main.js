@@ -7,33 +7,36 @@ async function getData(URL) {
     const response = await fetch(URL);
     const data = await response.json();
     console.log(data);
-    return data.Results;
+
+    if (Array.isArray(data) && data.length > 0) {
+      return data[0];
+    } else {
+      throw new Error("Invalid API Response")
+    }
   } catch (error) {
     console.error(error);
   }
 };
-const quoteURL =`https://api.quotable.io/quotes/random`;
-const quotes = await getData(quoteURL)
-quoteBtn.addEventListener("click",() =>{
-  console.log(quotes);
-  if(!quotes){
+
+quoteBtn.addEventListener("click", async () => {
+  const quoteURL = `https://api.quotable.io/quotes/random?format=json`;
+  const quotes = await getData(quoteURL);
+  if (!quotes) {
     return false;
   }
   quoteGen(quotes);
 });
-console.log(quoteURL);
-function quoteGen(quote){
-    appEl.textContent = " ";
-    quote.forEach((result) => {
-        const HTML = `
-        <h2>${result.content}</h2>
-        <h3>Author: ${result.author}</h3>
-        <button class="next">Next Quote</button>
-        <button class="fave">Add to Favorites</button>
-        <button class="dis">Dislike</button>
-        `   
-    appEl.insertAdjacentHTML("beforeend", HTML)
-    });
+
+function quoteGen(data) {
+  appEl.innerHTML = "";
+  const HTML = `
+  <h2>${data.content}</h2>
+  <h3>Author: ${data.author}</h3>
+  <button class="next">Next Quote</>
+  <button class="fave">Add to Favorites</>
+  <button class="dis">Dislike</>
+  `;
+  appEl.insertAdjacentHTML("beforeend", HTML);
 }
 
 appEl.addEventListener("click", async(event) => {
