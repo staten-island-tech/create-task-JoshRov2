@@ -60,7 +60,7 @@ appEl.addEventListener("click", async(event) => {
     }
   });
 
-  function faveQuotes(){    
+  /* function faveQuotes(){    
   faveEl.innerHTML = " ";
   favorites.forEach((quote) => {
     const HTML = `
@@ -68,20 +68,31 @@ appEl.addEventListener("click", async(event) => {
     <h4>${quote.author}</h4>
     `
     faveEl.insertAdjacentHTML("beforeend", HTML)
-  })}
+  })} */
 
-  function countQuotes(){
-    let currentNumber = 0
+  function faveQuotes(){
+    faveEl.innerHTML = "";
+    for (let i = 0; i < favorites.length; i) {
+      const quote = favorites[i];
+      const HTML = `
+      <h3>${quote.text}</h3>
+      <h4>${quote.author}</h4>
+      `;
+      faveEl.insertAdjacentHTML("beforeend", HTML)
+    }
+  }
+
+  function countQuotes() {
+    let currentNumber = 0;
     for (let i = 0; i < favorites.length; i++) {
-      if (favorites[i].selected) {
+      if (currentNumber = favorites.length) {
         currentNumber++;
       }    
-      return currentNumber;
     }
     const HTML = `
     <h2>You have ${currentNumber} favorite quotes.</h2>
     `
-    faveEl.insertAdjacentHTML("beforeend", HTML);
+    faveEl.innerHTML = HTML;
     console.log(currentNumber);
   }
   
