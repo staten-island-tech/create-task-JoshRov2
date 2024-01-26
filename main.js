@@ -49,6 +49,7 @@ appEl.addEventListener("click", async(event) => {
     console.log(quoteContent);
     favorites.push(quoteContent);
     console.log(favorites);
+    countQuotes();
     faveQuotes();
     }
     if(event.target.matches(".dis")){
@@ -63,8 +64,25 @@ appEl.addEventListener("click", async(event) => {
   faveEl.innerHTML = " ";
   favorites.forEach((quote) => {
     const HTML = `
-    <h2>${quote.text}</h2>
-    <h3>${quote.author}</h3>
+    <h3>${quote.text}</h3>
+    <h4>${quote.author}</h4>
     `
     faveEl.insertAdjacentHTML("beforeend", HTML)
   })}
+
+  function countQuotes(){
+    let currentNumber = 0
+    for (let i = 0; i < favorites.length; i++) {
+      if (favorites[i].selected) {
+        currentNumber++;
+      }    
+      return currentNumber;
+    }
+    const HTML = `
+    <h2>You have ${currentNumber} favorite quotes.</h2>
+    `
+    faveEl.insertAdjacentHTML("beforeend", HTML);
+    console.log(currentNumber);
+  }
+  
+  

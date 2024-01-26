@@ -1,0 +1,17 @@
+body {
+    background-color: lightblue;
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+}
+#favorites {
+    background-color: bisque;
+    border: 3px solid black;
+    border-radius: 5px;
+    margin: 3%;
+    padding: 3%;
+}
+button {
+    font-family: 'Work Sans', sans-serif;
+    border-radius: 2px;
+    border: 2px solid black;
+}
