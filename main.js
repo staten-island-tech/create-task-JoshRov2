@@ -23,7 +23,7 @@ async function getQuote() {
     return false;
   }
   console.log(quotes)
-  if (dislikedAuthors.includes(quotes.author)){
+  if (dislikedAuthors.includes(quotes.author)) {
     console.log('if');
     getQuote();
   } else {
@@ -42,58 +42,56 @@ function quoteGen(data) {
   appEl.insertAdjacentHTML("beforeend", HTML);
 }
 
-appEl.addEventListener("click", async(event) => {
+appEl.addEventListener("click", async (event) => {
   const el = event.target
-    if(event.target.matches(".fave")){
-    const quoteContent = {text: el.parentElement.children[0].textContent, author: el.parentElement.children[1].textContent};    
+  if (event.target.matches(".fave")) {
+    const quoteContent = { text: el.parentElement.children[0].textContent, author: el.parentElement.children[1].textContent };
     console.log(quoteContent);
     favorites.push(quoteContent);
     console.log(favorites);
-    countQuotes();
     faveQuotes();
-    }
-    if(event.target.matches(".dis")){
+  }
+  if (event.target.matches(".dis")) {
     const quoteAuthor = el.parentElement.children[1].textContent;
     const name = quoteAuthor.substring(8);
     console.log(name);
     dislikedAuthors.push(name);
-    }
-  });
+  }
+});
 
-  /* function faveQuotes(){    
-  faveEl.innerHTML = " ";
-  favorites.forEach((quote) => {
+function faveQuotes(reversed = false) {
+  let currentNumber = favorites.length
+  let insertLocation = "beforeend"
+  if (reversed === true) {
+    insertLocation = "afterbegin"
+  }
+  faveEl.innerHTML = `
+  <h2>Your Favorite Quotes:</h2>
+  <h4>You have ${currentNumber} favorite quotes.</h4>
+  <button class="reverse">Display from most recent.</button>
+  <div id="quoteContainer"></div>
+    `;
+  for (let i = 0; i < favorites.length; i++) {
+    const quote = favorites[i];
     const HTML = `
-    <h3>${quote.text}</h3>
-    <h4>${quote.author}</h4>
-    `
-    faveEl.insertAdjacentHTML("beforeend", HTML)
-  })} */
-
-  function faveQuotes(){
-    faveEl.innerHTML = "";
-    for (let i = 0; i < favorites.length; i) {
-      const quote = favorites[i];
-      const HTML = `
+      <div class="select" data-index=${i}>
       <h3>${quote.text}</h3>
       <h4>${quote.author}</h4>
+      <button class="remove">Remove from favorites.</button>
+      </div>
       `;
-      faveEl.insertAdjacentHTML("beforeend", HTML)
-    }
+    document.getElementById('quoteContainer').insertAdjacentHTML(insertLocation, HTML)
   }
+}
+faveEl.addEventListener("click", async (event) => {
+  if (event.target.matches(".reverse")) {
+    faveQuotes(true)
+  }
+  if (event.target.matches(".remove")) {
+    event.target.parentElement.remove();
+    const startIndex = event.target.parentElement.getAttribute("data-index");
+    favorites.splice(startIndex, 1);
+    faveQuotes();
+  }
+})
 
-  function countQuotes() {
-    let currentNumber = 0;
-    for (let i = 0; i < favorites.length; i++) {
-      if (currentNumber = favorites.length) {
-        currentNumber++;
-      }    
-    }
-    const HTML = `
-    <h2>You have ${currentNumber} favorite quotes.</h2>
-    `
-    faveEl.innerHTML = HTML;
-    console.log(currentNumber);
-  }
-  
-  
