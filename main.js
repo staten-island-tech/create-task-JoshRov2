@@ -45,7 +45,10 @@ function quoteGen(data) {
 appEl.addEventListener("click", async (event) => {
   const el = event.target
   if (event.target.matches(".fave")) {
-    const quoteContent = { text: el.parentElement.children[0].textContent, author: el.parentElement.children[1].textContent };
+    const quoteContent = { 
+      text: el.parentElement.children[0].textContent, 
+      author: el.parentElement.children[1].textContent 
+    };
     console.log(quoteContent);
     favorites.push(quoteContent);
     console.log(favorites);
