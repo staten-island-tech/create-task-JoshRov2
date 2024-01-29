@@ -30,7 +30,6 @@ async function getQuote() {
     quoteGen(quotes);
   }
 }
-
 function quoteGen(data) {
   appEl.innerHTML = "";
   const HTML = `
