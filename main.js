@@ -96,4 +96,3 @@ faveEl.addEventListener("click", async (event) => {
     faveQuotes();
   }
 })
-
